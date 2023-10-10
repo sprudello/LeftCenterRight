@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LeftCenterRight
 {
@@ -23,14 +24,23 @@ namespace LeftCenterRight
         }
         public List<int> GetValues(int values)
         {
-            Shake();
-
             List<int> numbers = new List<int>();
+            numbers.Clear();
+
+            Shake();
             for (int i = 0; i < values; i++)
             {
-                numbers.Add(_dice[i].LastValue);
+                try
+                {
+                    numbers.Add(_dice[i].LastValue);
+                }
+                catch
+                { 
+                    Die catchDie = new Die();
+                    _dice.Add(catchDie);
+                    _dice[i].Roll();
+                }
             }
-
             return numbers;
         }
     }

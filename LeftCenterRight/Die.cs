@@ -4,9 +4,9 @@ namespace LeftCenterRight
 {
     class Die
     {
-        const int MAX_NUMBER = 6;
-        Random random = new Random();
-        int _lastValue;
+        private const int MAX_NUMBER = 6;
+        private Random _random;
+        private int _lastValue;
         public int LastValue
         {
             get { return _lastValue; }
@@ -15,7 +15,9 @@ namespace LeftCenterRight
 
         public void Roll()
         {
-            LastValue = random.Next(1, MAX_NUMBER + 1);
+            _random = new Random();
+            LastValue = _random.Next(1, MAX_NUMBER + 1);
+            Console.WriteLine(LastValue);
         }
     }
 }

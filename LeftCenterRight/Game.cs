@@ -17,14 +17,15 @@ namespace LeftCenterRight
         public void Play()
         {
             SetStartPlayer();
-            while(MoreThanOnePlayerHasChips())
-            {
-                int diceToRoll = Math.Min(3, _currentPlayer.NumberOfDice); 
-                List<int> rolledValues = _diceCup.GetValues(diceToRoll);
-                ProcessDiceRoll(rolledValues);
+            Console.WriteLine($"Current Player: {_currentPlayer.Name}");
+            while (MoreThanOnePlayerHasChips())
+            { 
+                ProcessDiceRoll(_currentPlayer.DiceRoll(_diceCup));
                 _currentPlayer = PlayerToTheRight();
+                Console.WriteLine($"Current Player: {_currentPlayer.Name}");
                 _cli.PrintStatus(_playerList);
             }
+            _cli.PrintWinner(_playerList);
         }
         public void ProcessDiceRoll(List<int> values)
         {
@@ -55,19 +56,19 @@ namespace LeftCenterRight
         public Player PlayerToTheRight()
         {
             int currentPlayerIndex = _playerList.IndexOf(_currentPlayer);
-            return _playerList[(currentPlayerIndex + 1) % _playerList.Count]; // Modulo, to make like a circle to not exceed the max.
+            return _playerList[(currentPlayerIndex - 1 + _playerList.Count) % _playerList.Count]; // Add the count to the subtracted to not get negaitve numbers
         }
         public Player PlayerToTheLeft()
         {
             int currentPlayerIndex = _playerList.IndexOf(_currentPlayer);
-            return _playerList[(currentPlayerIndex - 1 + _playerList.Count) % _playerList.Count]; // Add the count to the subtracted to not get negaitve numbers
+            return _playerList[(currentPlayerIndex + 1) % _playerList.Count]; // Modulo, to make like a circle to not exceed the max.
         }
         public bool MoreThanOnePlayerHasChips()
         {
             int amountOfPlayersWithChips = 0;
             foreach (Player player in _playerList)
             {
-                if (player.HasChipsLeft)
+                if (!player.HasChipsLeft)
                 {
                     amountOfPlayersWithChips++;
                 }

@@ -14,7 +14,7 @@ namespace LeftCenterRight
                 string playerName = Console.ReadLine();
                 Player newPlayer = new Player(playerName);
                 playerList.Add(newPlayer);
-            } while (DecisionMorePlayers());
+            } while (playerList.Count < 3 || DecisionMorePlayers());
             return playerList;
         }
         public bool DecisionMorePlayers()
@@ -54,14 +54,15 @@ namespace LeftCenterRight
                     break;
                 }
             }
-
             if (winner != null)
             {
                 Console.WriteLine($"Congratulations, {winner.Name} is the winner!");
+                Console.ReadKey();
             }
             else
             {
                 Console.WriteLine("How did we get here?"); //However this should happen
+                Console.ReadKey();
             }
         }
     }

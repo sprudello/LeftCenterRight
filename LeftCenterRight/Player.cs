@@ -6,9 +6,9 @@ namespace LeftCenterRight
     {
         int _chips = 3;
         string _name;
-        public string Name { get; set; }
-        public bool HasChipsLeft { get { return _chips >= 1; } }
-        public int NumberOfDice { get; set; }
+        public string Name { get { return _name; } private set { _name = value; } }
+        public bool HasChipsLeft { get { return _chips < 1; } }
+        public int NumberOfDice { get { return _chips; } }
 
         public Player(string name)
         {
