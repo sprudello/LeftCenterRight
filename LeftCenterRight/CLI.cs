@@ -48,7 +48,7 @@ namespace LeftCenterRight
             Player winner = null;
             foreach (Player player in players)
             {
-                if (player.HasChipsLeft)
+                if (!player.HasChipsLeft)
                 {
                     winner = player;
                     break;

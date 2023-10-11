@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LeftCenterRight
 {
@@ -31,14 +32,10 @@ namespace LeftCenterRight
         {
             return $"{_name} has {_chips} chips.";
         }
-        public string PrintDice(List<Die> dice)
+        public string PrintDice(List<int> dice) //In english UML is a wrong translation
         {
-            List<string> diceStrings = new List<string>();
-            foreach (var die in dice)
-            {
-                diceStrings.Add(die.LastValue.ToString());
-            }
-            return $"{_name} rolled a {string.Join(", ", diceStrings)}";
+
+            return $"{_name} has rolled: {string.Join(", ", dice)}";
         }
     }
 }

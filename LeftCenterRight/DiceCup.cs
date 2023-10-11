@@ -26,7 +26,6 @@ namespace LeftCenterRight
         {
             List<int> numbers = new List<int>();
             numbers.Clear();
-
             Shake();
             for (int i = 0; i < values; i++)
             {

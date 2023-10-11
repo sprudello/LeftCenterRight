@@ -29,6 +29,7 @@ namespace LeftCenterRight
         }
         public void ProcessDiceRoll(List<int> values)
         {
+            Console.WriteLine(_currentPlayer.PrintDice(values));
             foreach (int value in values)
             {
                 switch (value)
