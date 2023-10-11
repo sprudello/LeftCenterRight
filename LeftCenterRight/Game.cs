@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace LeftCenterRight
 {
@@ -19,10 +20,10 @@ namespace LeftCenterRight
             SetStartPlayer();
             Console.WriteLine($"Current Player: {_currentPlayer.Name}");
             while (MoreThanOnePlayerHasChips())
-            { 
+            {
+                Console.WriteLine($"Current Player: {_currentPlayer.Name}");
                 ProcessDiceRoll(_currentPlayer.DiceRoll(_diceCup));
                 _currentPlayer = PlayerToTheRight();
-                Console.WriteLine($"Current Player: {_currentPlayer.Name}");
                 _cli.PrintStatus(_playerList);
             }
             _cli.PrintWinner(_playerList);
@@ -95,7 +96,7 @@ namespace LeftCenterRight
         }   
         public void PlaceChipInPot()
         {
-            _currentPlayer.PassOnChip();
+            _currentPlayer.PassOnChip(); //Chip just goes away.
         }
     }
 }

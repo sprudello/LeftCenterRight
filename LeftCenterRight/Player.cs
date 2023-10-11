@@ -34,8 +34,7 @@ namespace LeftCenterRight
         }
         public string PrintDice(List<int> dice) //In english UML is a wrong translation
         {
-
-            return $"{_name} has rolled: {string.Join(", ", dice)}";
+            return $"{_name} has rolled: {string.Join(", ", dice)}"; // Joins the ints of the list to one string separated with a comma
         }
     }
 }
