@@ -21,10 +21,19 @@ namespace LeftCenterRight
             Console.WriteLine($"Current Player: {_currentPlayer.Name}");
             while (MoreThanOnePlayerHasChips())
             {
-                Console.WriteLine($"Current Player: {_currentPlayer.Name}");
-                ProcessDiceRoll(_currentPlayer.DiceRoll(_diceCup));
-                _currentPlayer = PlayerToTheRight();
-                _cli.PrintStatus(_playerList);
+                if (!_currentPlayer.HasChipsLeft)
+                {
+                    Console.WriteLine($"Current Player: {_currentPlayer.Name}");
+                    ProcessDiceRoll(_currentPlayer.DiceRoll(_diceCup));
+                    _cli.PrintStatus(_playerList);
+                    _currentPlayer = PlayerToTheRight();
+                }
+                else
+                {
+                    Console.WriteLine
+                    ($"{_currentPlayer.Name} skipped due to insufficient amount of chips.\n");
+                    _currentPlayer = PlayerToTheRight();
+                }
             }
             _cli.PrintWinner(_playerList);
         }
@@ -58,12 +67,14 @@ namespace LeftCenterRight
         public Player PlayerToTheRight()
         {
             int currentPlayerIndex = _playerList.IndexOf(_currentPlayer);
-            return _playerList[(currentPlayerIndex - 1 + _playerList.Count) % _playerList.Count]; // Add the count to the subtracted to not get negaitve numbers
+            return _playerList[(currentPlayerIndex - 1 + _playerList.Count) % _playerList.Count]; 
+            // Add the count to the subtracted to not get negaitve numbers
         }
         public Player PlayerToTheLeft()
         {
             int currentPlayerIndex = _playerList.IndexOf(_currentPlayer);
-            return _playerList[(currentPlayerIndex + 1) % _playerList.Count]; // Modulo, to make like a circle to not exceed the max.
+            return _playerList[(currentPlayerIndex + 1) % _playerList.Count]; 
+            // Modulo, to make like a circle to not exceed the max.
         }
         public bool MoreThanOnePlayerHasChips()
         {
